@@ -28,21 +28,22 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        function revealOnScroll() {
-  const reveals = document.querySelectorAll(".reveal-bottom, .reveal-left, .reveal-right, reveal-up");
+        document.addEventListener("DOMContentLoaded", function () {
+        const boxes = document.querySelectorAll('.box');
 
-  reveals.forEach((el) => {
-    const windowHeight = window.innerHeight;
-    const elementTop = el.getBoundingClientRect().top;
-    const elementVisible = 100;
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                } else {
+                    entry.target.classList.remove('fade-in'); // Remove se quiser o "fade-out"
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
 
-    if (elementTop < windowHeight - elementVisible) {
-      el.classList.add("active");
-    } else {
-      el.classList.remove("active"); // some se subir
-    }
-  });
-}
-
-window.addEventListener("scroll", revealOnScroll);
-revealOnScroll();
+        boxes.forEach(box => {
+            observer.observe(box);
+        });
+    });

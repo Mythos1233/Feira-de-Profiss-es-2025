@@ -279,3 +279,18 @@ html{
 .footer p{
     margin-top: 25px;
 }
+
+/* Inicialmente invisível e com opacidade zero */
+.box {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    overflow: hidden;
+}
+
+/* Quando o elemento entra na tela */
+.box.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+    overflow: hidden;
+}
